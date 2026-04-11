@@ -66,7 +66,7 @@
     color: #fff;
     border: none;
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.15em;
     cursor: pointer;
@@ -140,16 +140,13 @@
 
 <script>
 const segs = [
-  { label:"테린\n당첨!",      pct:12.5,  bg:"#FF6B6B", fg:"#fff" },
-  { label:"꽝",               pct:13.34, bg:"#FFE0E0", fg:"#CC5555" },
-  { label:"잔와인\n당첨!",    pct:5,     bg:"#A78BFA", fg:"#fff" },
-  { label:"감자튀김\n당첨!",  pct:10,    bg:"#FCD34D", fg:"#7C5C00" },
-  { label:"와인 한병\n당첨!", pct:5,     bg:"#F97316", fg:"#fff" },
-  { label:"감자튀김\n당첨!",  pct:10,    bg:"#FBBF24", fg:"#7C5C00" },
-  { label:"잔와인\n당첨!",    pct:5,     bg:"#C4B5FD", fg:"#4C1D95" },
-  { label:"꽝",               pct:13.33, bg:"#FEE2E2", fg:"#CC5555" },
-  { label:"테린\n당첨!",      pct:12.5,  bg:"#F87171", fg:"#fff" },
-  { label:"꽝",               pct:13.33, bg:"#FFCCCC", fg:"#CC5555" },
+  { label:"테린\n2조각",        pct:20, bg:"#FF6B6B", fg:"#fff" },
+  { label:"까르보나라",          pct:20, bg:"#FCD34D", fg:"#7C5C00" },
+  { label:"고등어스테이크\n파스타", pct:10, bg:"#6EE7B7", fg:"#065F46" },
+  { label:"칵테일 또는\n와인2잔", pct:10, bg:"#A78BFA", fg:"#fff" },
+  { label:"테린\n2조각",        pct:20, bg:"#F87171", fg:"#fff" },
+  { label:"숯불닭",              pct:10, bg:"#FBBF24", fg:"#7C5C00" },
+  { label:"고등어스테이크\n파스타", pct:10, bg:"#34D399", fg:"#065F46" },
 ];
 
 const total = segs.reduce((s,x)=>s+x.pct,0);
@@ -178,12 +175,10 @@ function draw(rot) {
 
   segs.forEach(s => {
     const ea = a + r2d(s.deg);
-
     ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,R,a,ea); ctx.closePath();
     ctx.fillStyle = s.bg; ctx.fill();
     ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
 
-    // label
     const mid = a + r2d(s.deg/2);
     const lr = R * 0.64;
     ctx.save();
@@ -193,14 +188,11 @@ function draw(rot) {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
-    // arc chord width at label radius — limits max text width
     const chordHalf = lr * Math.sin(r2d(s.deg/2));
     const maxW = Math.max(chordHalf * 1.7, 20);
-
     const lines = s.label.split('\n');
-    const baseFontSize = s.deg > 28 ? 12 : s.deg > 17 ? 10.5 : 9.5;
+    const baseFontSize = s.deg > 45 ? 13 : s.deg > 30 ? 12 : s.deg > 20 ? 10.5 : 9.5;
 
-    // find fitting size across all lines
     let fs = baseFontSize;
     lines.forEach(line => {
       const fit = fitText(line, maxW, fs);
@@ -218,11 +210,9 @@ function draw(rot) {
     a = ea;
   });
 
-  // outer ring
   ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2);
   ctx.strokeStyle = '#e5e5e5'; ctx.lineWidth = 2; ctx.stroke();
 
-  // center hub bg
   ctx.beginPath(); ctx.arc(cx,cy,15,0,Math.PI*2);
   ctx.fillStyle='#fff'; ctx.fill();
   ctx.strokeStyle='#ddd'; ctx.lineWidth=2; ctx.stroke();
@@ -259,12 +249,12 @@ function spin() {
     const w = winner(cur);
     document.getElementById('rtxt').textContent = w.label.replace('\n', ' ');
     document.getElementById('res').classList.add('show');
-    if (!w.label.startsWith('꽝')) confetti();
+    confetti();
   })(t0);
 }
 
 function confetti() {
-  const cols = ['#FF6B6B','#FCD34D','#A78BFA','#F97316','#FBBF24','#F87171'];
+  const cols = ['#FF6B6B','#FCD34D','#A78BFA','#FBBF24','#6EE7B7','#F87171'];
   for (let i=0;i<70;i++) {
     const el = document.createElement('div');
     el.className = 'piece';
