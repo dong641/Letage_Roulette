@@ -75,32 +75,6 @@
   button:hover { background: #444; }
   button:disabled { background: #ccc; cursor: not-allowed; }
 
-  .result {
-    text-align: center;
-    min-height: 56px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    opacity: 0;
-    transition: opacity 0.4s;
-  }
-  .result.show { opacity: 1; }
-
-  .result-label {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #bbb;
-  }
-
-  .result-text {
-    font-size: 24px;
-    font-weight: 700;
-    color: #222;
-  }
-
   .count {
     font-size: 11px;
     color: #ccc;
@@ -131,21 +105,16 @@
 
 <button id="btn" onclick="spin()">SPIN</button>
 
-<div class="result" id="res">
-  <div class="result-label">Result</div>
-  <div class="result-text" id="rtxt"></div>
-</div>
-
 <div class="count" id="cnt"></div>
 
 <script>
 const segs = [
-  { label:"테린\n2조각",        pct:20, bg:"#FF6B6B", fg:"#fff" },
-  { label:"까르보나라",          pct:20, bg:"#FCD34D", fg:"#7C5C00" },
+  { label:"테린\n2조각",           pct:20, bg:"#FF6B6B", fg:"#fff" },
+  { label:"까르보나라",             pct:20, bg:"#FCD34D", fg:"#7C5C00" },
   { label:"고등어스테이크\n파스타", pct:10, bg:"#6EE7B7", fg:"#065F46" },
-  { label:"칵테일 또는\n와인2잔", pct:10, bg:"#A78BFA", fg:"#fff" },
-  { label:"테린\n2조각",        pct:20, bg:"#F87171", fg:"#fff" },
-  { label:"숯불닭",              pct:10, bg:"#FBBF24", fg:"#7C5C00" },
+  { label:"칵테일 또는\n와인2잔",  pct:10, bg:"#A78BFA", fg:"#fff" },
+  { label:"테린\n2조각",           pct:20, bg:"#F87171", fg:"#fff" },
+  { label:"숯불닭",                 pct:10, bg:"#FBBF24", fg:"#7C5C00" },
   { label:"고등어스테이크\n파스타", pct:10, bg:"#34D399", fg:"#065F46" },
 ];
 
@@ -230,7 +199,6 @@ function spin() {
   if (spinning) return;
   spinning = true;
   document.getElementById('btn').disabled = true;
-  document.getElementById('res').classList.remove('show');
   const extra = 1800 + Math.random()*1440;
   const dur = 4000 + Math.random()*800;
   const from = cur, t0 = performance.now();
@@ -246,9 +214,6 @@ function spin() {
     document.getElementById('btn').disabled = false;
     spins++;
     document.getElementById('cnt').textContent = `총 ${spins}회`;
-    const w = winner(cur);
-    document.getElementById('rtxt').textContent = w.label.replace('\n', ' ');
-    document.getElementById('res').classList.add('show');
     confetti();
   })(t0);
 }
