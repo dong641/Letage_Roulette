@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -7,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-
   body {
     background: #fff;
     font-family: 'Noto Sans KR', sans-serif;
@@ -19,21 +19,13 @@
     padding: 48px 24px 56px;
     gap: 28px;
   }
-
-  .logo img {
-    width: 148px;
-    display: block;
-    mix-blend-mode: multiply;
-  }
-
+  .logo img { width: 148px; display: block; mix-blend-mode: multiply; }
   .wheel-wrap {
     position: relative;
     width: min(340px, 88vw);
     height: min(340px, 88vw);
   }
-
   canvas { display: block; border-radius: 50%; }
-
   .needle {
     position: absolute;
     top: -18px; left: 50%;
@@ -45,7 +37,6 @@
     z-index: 10;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
   }
-
   .hub {
     position: absolute;
     top: 50%; left: 50%;
@@ -59,7 +50,6 @@
     transition: background 0.15s;
   }
   .hub:hover { background: #222; }
-
   button {
     width: 180px; height: 50px;
     background: #222;
@@ -74,13 +64,7 @@
   }
   button:hover { background: #444; }
   button:disabled { background: #ccc; cursor: not-allowed; }
-
-  .count {
-    font-size: 11px;
-    color: #ccc;
-    letter-spacing: 0.04em;
-  }
-
+  .count { font-size: 11px; color: #ccc; letter-spacing: 0.04em; }
   .piece {
     position: fixed; pointer-events: none; z-index: 999;
     animation: fall linear forwards;
@@ -109,13 +93,13 @@
 
 <script>
 const segs = [
-  { label:"테린\n2조각",           pct:20, bg:"#FF6B6B", fg:"#fff" },
-  { label:"까르보나라",             pct:20, bg:"#FCD34D", fg:"#7C5C00" },
-  { label:"고등어스테이크\n파스타", pct:10, bg:"#6EE7B7", fg:"#065F46" },
-  { label:"칵테일 또는\n와인2잔",  pct:10, bg:"#A78BFA", fg:"#fff" },
-  { label:"테린\n2조각",           pct:20, bg:"#F87171", fg:"#fff" },
-  { label:"숯불닭",                 pct:10, bg:"#FBBF24", fg:"#7C5C00" },
-  { label:"고등어스테이크\n파스타", pct:10, bg:"#34D399", fg:"#065F46" },
+  { label:"테린\n2조각",   pct:20, bg:"#FF6B6B", fg:"#fff" },
+  { label:"까르보나라",     pct:20, bg:"#FCD34D", fg:"#7C5C00" },
+  { label:"와인\n2잔",     pct:10, bg:"#6EE7B7", fg:"#065F46" },
+  { label:"칵테일\n2잔",   pct:10, bg:"#A78BFA", fg:"#fff" },
+  { label:"테린\n2조각",   pct:20, bg:"#F87171", fg:"#fff" },
+  { label:"알배추",         pct:10, bg:"#FBBF24", fg:"#7C5C00" },
+  { label:"와인\n2잔",     pct:10, bg:"#34D399", fg:"#065F46" },
 ];
 
 const total = segs.reduce((s,x)=>s+x.pct,0);
@@ -232,5 +216,6 @@ function confetti() {
 
 draw(0);
 </script>
+
 </body>
 </html>
